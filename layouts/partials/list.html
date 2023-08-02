@@ -1,0 +1,18 @@
+<section>
+    <ul class="article-list">
+		{{ range .Pages -}}
+			{{ partial "list-item" . }}
+		{{ end -}}
+    </ul>
+</section>
+
+<script defer>
+    var articleLinks = document.getElementsByClassName("article-link");
+    for (var idx = 0; idx < articleLinks.length; idx++) {
+        var articleLink = articleLinks.item(idx);
+
+        articleLink.addEventListener("click", function () {
+            location.href = this.getAttribute("data-link", "_self");
+        });
+    }
+</script>

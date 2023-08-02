@@ -1,0 +1,38 @@
+<section>
+	<h1>{{ .Title }}</h1>
+	{{- if not .Params.internal -}}
+	<p class="info">
+		<span class="row">
+			{{- if (and .Params.tags (gt (.Params.tags | len) 0)) -}}
+			<span>
+				<span class="bold">Tags: </span>
+
+				{{ range $i, $e := .Params.tags -}}
+					{{- if $i -}}, {{ end -}}
+					<a href='{{ "/tags/" | relLangURL }}{{ . | urlize }}'>{{ $e | title }}</a>
+				{{- end -}}
+			</span>
+			{{- end -}}
+
+			<span>
+				{{ partial "date.html" (dict "date" .PublishDate "monate" $.Site.Data.months) }} von&nbsp;
+				{{- if .Params.author -}}
+					{{ .Params.author }}
+				{{- else -}}
+					{{ $.Site.Params.author }}
+				{{- end -}}
+			</span>
+		</span>
+
+		{{- if .Params.filename -}}
+		<span class="row">
+			<a href="/pdf/{{ .Params.filename }}" target="_blank">PDF-Version herunterladen</a>
+		</span>
+		{{- else if .Params.filepath -}}
+		<span class="row">
+			<a href="{{ .Params.filepath }}" target="_blank">PDF-Version herunterladen</a>
+		</span>
+		{{- end -}}
+	</p>
+	{{- end -}}
+</section>

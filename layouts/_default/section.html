@@ -1,0 +1,11 @@
+{{ define "main" -}}
+<section>
+  <h1>{{ .Title | title }}</h1>
+</section>
+<section>
+  {{ .Content -}}
+</section>
+
+{{ partial "list" (dict "context" .) }}
+
+{{ end }}
